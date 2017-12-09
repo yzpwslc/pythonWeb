@@ -1,9 +1,30 @@
-from flask import Flask
+from flask import Flask, render_template,Response
+import cv2
+
+class VideoCam(object):
+	def __init__(self):
+		self.video = cv2.VideoCapture(0)
+
+	def get_frame(self):
+		success,image = self.video.read()
+		ret,jpeg = cv2.imencode('.jpg',image)
+		return jpeg.tobytes()
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return '<h1>Hello World!</h1>'
+	return render_template('index.html')
+
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield(b'--frame\r\n'
+			b'COntent-Type:image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+def video_feed():
+	return Response(gen(VideoCam()),mimetype = 'multipart/x-mixed-replace;boundary=frame')
+
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(host = '0.0.0.0',debug = True,port = 5000)
