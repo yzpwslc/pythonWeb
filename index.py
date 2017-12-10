@@ -1,5 +1,6 @@
 from flask import Flask, render_template,Response
 import cv2
+import time
 
 class VideoCam(object):
 	def __init__(self):
@@ -13,6 +14,20 @@ class VideoCam(object):
 		ret,jpeg = cv2.imencode('.jpg',image)
 		return jpeg.tobytes()
 
+class motorControl(object):
+	def __init__(self):
+		GPIO.setmode(GPIO.BCM)
+		self.lf_pin = 18
+		GPIO.setmode(self.lf_pin,GPIO.OUT)
+
+	def __del__(self):
+		GPIO.clenup()
+
+	def  motorStart():
+		GPIO.output(self.lf_pin,GPIO.HIGH)
+		time.sleep(10)
+
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -24,6 +39,13 @@ def gen(camera):
 		frame = camera.get_frame()
 		yield(b'--frame\r\n'
 			b'COntent-Type:image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+def motorContor(motor):
+	motor.motorStart()
+
+@app.route('/motor_control')
+def motor_control():
+	motorContor(motorControl())
 @app.route('/video_feed')
 def video_feed():
 	return Response(gen(VideoCam()),mimetype = 'multipart/x-mixed-replace;boundary=frame')
