@@ -3,14 +3,17 @@
 <head>
 	<title>test pCam</title>
 	<script>
-	function led(){
-		window.location.href='/led'
+	function led1(){
+		window.location.href='/led1'
 	}
-	</script
+	function led0(){
+		window.location.href='/led0'
+	}
+	</script>
 </head>
 <body>
     <p>hello template!</p>
     <!-- <img src = "{{ url_for('video_feed')}}" width = "1280" height = "720"> -->
-    <p><input type="button" name="contol" onclick="led()" value = "led"/></p>
+    <p><input type="button" name="contol" onclick="led1()" value = "ledon"/><input type="button" name="contol" onclick="led0()" value = "ledoff"/></p>
 </body>
 </html>

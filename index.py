@@ -12,9 +12,14 @@ class rasCointrol(object):
 		[gpio.setup(lPins[i],gpio.OUT) for i in range(len(lPins))]
 		[gpio.output(lPins[i],v) for i,v in enumerate(cStates)]
 		time.sleep(1)
-		[gpio.output(lPins[i],v) for i,v in enumerate(cStates1)]
 	def __del__(self):
 		gpio.clenup()
+		
+	def ledOn(self):
+		[gpio.output(lPins[i],v) time.sleep(0.5) for i,v in enumerate(cStates1)]
+		
+	def ledOff(self):
+		[gpio.output(lPins[i],v) time.sleep(0.5) for i,v in enumerate(cStates)]
 
 
 
@@ -62,9 +67,16 @@ def gen(camera):
 ##@app.route('/motor_control')
 ##def motor_control():
 ##	motorContor(motorControl())
-@app.route('/led')
-def led():
-	return Response(rasCointrol())
+@app.route('/led1')
+def led1():
+	rs = rasCointrol()
+	rs.ledOn()	
+	return render_template('index.html')
+@app.route('/led0')
+def led0():
+	rs = rasCointrol()	
+	rs.ledOff()
+	return render_template('index.html')
 @app.route('/video_feed')
 def video_feed():
 	return Response(gen(VideoCam()),mimetype = 'multipart/x-mixed-replace;boundary=frame')
