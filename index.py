@@ -5,21 +5,21 @@ import time
 
 class rasCointrol(object):
 	def __init__(self):
-		lPins = [17,18,23]
-		cStates = [0,0,0]
-		cStates1 = [1,1,1]
+		self.lPins = [17,18,23]
+		self.cStates = [0,0,0]
+		self.cStates1 = [1,1,1]
 		gpio.setmode(gpio.BCM)
-		[gpio.setup(lPins[i],gpio.OUT) for i in range(len(lPins))]
-		[gpio.output(lPins[i],v) for i,v in enumerate(cStates)]
+		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(self.len(lPins))]
+		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 		time.sleep(1)
 	def __del__(self):
 		gpio.clenup()
 		
 	def ledOn(self):
-		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates1)]
+		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
 		
 	def ledOff(self):
-		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates)]
+		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 
 
 
