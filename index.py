@@ -64,7 +64,7 @@ def gen(camera):
 ##	motorContor(motorControl())
 @app.route('/led')
 def led():
-	rasCointrol()
+	return Response(rasCointrol())
 @app.route('/video_feed')
 def video_feed():
 	return Response(gen(VideoCam()),mimetype = 'multipart/x-mixed-replace;boundary=frame')
