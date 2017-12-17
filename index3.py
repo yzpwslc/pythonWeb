@@ -11,7 +11,7 @@ define("port",default=8000,help="run on the given port",type=int)
 
 class videoHandler(tornado.web.RequestHandler):
 	def get(self):
-		ret,img = self.Application.video.read()
+		ret,img = self.application.cam.read()
 		if ret:
 			self.set_header("Content-Type", "image/jpeg")
 			self.set_header("Refresh", "1")
