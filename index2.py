@@ -28,7 +28,6 @@ class camHandler(tornado.web.RequestHandler):
 class IndexHandler(tornado.web.RequestHandler):
 	def __init__(self):
 		self.video = cv2.VideoCapture(0)
-		tornado.web.Application.__init__(self, handlers, debug = True ,cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o")
 	def __del__(self):
 		self.video.release()
 	def get(self):
