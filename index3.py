@@ -14,7 +14,7 @@ class videoHandler(tornado.web.RequestHandler):
 		ret,img = self.application.cam.read()
 		if ret:
 			self.set_header("Content-Type", "image/jpeg")
-			self.set_header("Refresh", "1")
+			self.set_header("Refresh", "0.2")
 			self.set_header("content-transfer-encoding", "binary")
 			r,i = cv2.imencode('.jpg',img)
 			if r:
@@ -27,7 +27,7 @@ class videoHandler(tornado.web.RequestHandler):
 class IndexHandler(tornado.web.RequestHandler):
 	def get(self):
 		greeting = self.get_argument('greeting','Hello')
-		self.write(greeting + ', cam!')
+		self.write(greeting + ', cam2!')
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers=[(r"/",IndexHandler),(r"/cam",videoHandler)]
