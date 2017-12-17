@@ -24,7 +24,7 @@ class videoHandler(tornado.web.RequestHandler):
 		else:
 			self.write('Sorry,get cam data failed!')	
 
-class camVideo(tornado.web.Application)
+class camVideo(tornado.web.Application):
 	def __init__(self):
 		self.cam = cv2.VideoCapture(0)
 	def __del__(self):
