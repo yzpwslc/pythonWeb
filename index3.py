@@ -10,6 +10,10 @@ from tornado.options import define,options
 define("port",default=8000,help="run on the given port",type=int)
 
 class IndexHandler(tornado.web.RequestHandler):
+	def __init__(self):
+		self.video = cv2.VideoCapture(0)
+	def __del__(self):
+		self.video.release()
 	def get(self):
 		greeting = self.get_argument('greeting','Hello')
 		self.write(greeting + ', friendly user2!')
