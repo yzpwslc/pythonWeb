@@ -9,7 +9,7 @@ class rasCointrol(object):
 		self.cStates = [0,0,0]
 		self.cStates1 = [1,1,1]
 		gpio.setmode(gpio.BCM)
-		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(self.len(lPins))]
+		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(len(self.lPins))]
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 		time.sleep(1)
 	def __del__(self):
