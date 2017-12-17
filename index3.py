@@ -24,20 +24,19 @@ class videoHandler(tornado.web.RequestHandler):
 		else:
 			self.write('Sorry,get cam data failed!')	
 
-class camVideo(tornado.web.Application):
-	def __init__(self):
-		self.cam = cv2.VideoCapture(0)
-	def __del__(self):
-		self.cam.release()
-
 class IndexHandler(tornado.web.RequestHandler):
 	def get(self):
 		greeting = self.get_argument('greeting','Hello')
 		self.write(greeting + ', friendly user2!')
+class Application(tornado.web.Application):
+	def __init__(self):
+		handlers=[(r"/",IndexHandler),(r"/cam",videoHandler)]
+		settings = dict(debug=True,)
+		tornado.web.Application.__init__(self,handlers,**settings)
 		
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
-	app = tornado.web.Application(handlers=[(r"/",IndexHandler),(r"/cam",videoHandler)],debug=True)
+	app = Application()
 	http_server = tornado.httpserver.HTTPServer(app)
 	http_server.listen(options.port)
 	tornado.ioloop.IOLoop.instance().start()
