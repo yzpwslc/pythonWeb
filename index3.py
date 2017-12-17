@@ -11,7 +11,7 @@ define("port",default=8000,help="run on the given port",type=int)
 
 class videoHandler(tornado.web.RequestHandler):
 	def get(self):
-		ret,img = self.camVideo.video.read()
+		ret,img = self.Application.video.read()
 		if ret:
 			self.set_header("Content-Type", "image/jpeg")
 			self.set_header("Refresh", "1")
@@ -27,12 +27,15 @@ class videoHandler(tornado.web.RequestHandler):
 class IndexHandler(tornado.web.RequestHandler):
 	def get(self):
 		greeting = self.get_argument('greeting','Hello')
-		self.write(greeting + ', friendly user2!')
+		self.write(greeting + ', cam!')
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers=[(r"/",IndexHandler),(r"/cam",videoHandler)]
 		settings = dict(debug=True,)
+		self.cam = cv2.VideoCapture(0)
 		tornado.web.Application.__init__(self,handlers,**settings)
+	def __del__(self):
+		self.cam.release()
 		
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
