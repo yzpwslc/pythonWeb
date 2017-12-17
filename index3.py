@@ -7,7 +7,7 @@ import cv2
 import time
 
 from tornado.options import define,options
-define("port",default=80,help="run on the given port",type=int)
+define("port",default=8000,help="run on the given port",type=int)
 
 class videoHandler(tornado.web.RequestHandler):
 	def get(self):
