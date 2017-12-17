@@ -16,10 +16,10 @@ class rasCointrol(object):
 		gpio.clenup()
 		
 	def ledOn(self):
-		[gpio.output(lPins[i],v) time.sleep(0.5) for i,v in enumerate(cStates1)]
+		[gpio.output(lPins[i],v) for i,v in enumerate(cStates1)]
 		
 	def ledOff(self):
-		[gpio.output(lPins[i],v) time.sleep(0.5) for i,v in enumerate(cStates)]
+		[gpio.output(lPins[i],v) for i,v in enumerate(cStates)]
 
 
 
