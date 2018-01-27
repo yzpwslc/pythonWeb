@@ -15,13 +15,13 @@
 		$(function(){
 			$('#ledon').click(function(){
 				$.ajax({
-					url:'/led1',
+					url:'http://192.168.2.120:8000/led1',
 					async:false
 				});
 			});
 			$('#ledoff').click(function(){
 				$.ajax({
-					url:'/led0',
+					url:'http://192.168.2.120:8000/led0',
 					async:false
 				});
 			});

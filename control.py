@@ -1,4 +1,4 @@
-from flask import Flask, render_template,Response
+from flask import Flask
 import RPi.GPIO as gpio
 import time
 
@@ -38,20 +38,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return render_template('index2.html')
-
-@app.route('/led1')
-def led1():
 	rs = rasCointrol()
 	rs.ledOn()	
 @app.route('/led0')
 def led0():
 	rs = rasCointrol()	
 	rs.ledOff()
-@app.route('/video_feed')
-def video_feed():
-	return Response(gen(VideoCam()),mimetype = 'multipart/x-mixed-replace;boundary=frame')
-
 
 if __name__ == '__main__':
 	app.run(host = '0.0.0.0',debug = True,port = 8000)
