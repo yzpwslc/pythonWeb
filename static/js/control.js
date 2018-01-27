@@ -4,5 +4,12 @@ $(function(){
 			url:'http://192.168.2.120:8000/led1',
 			async:false
 		});
-	})
+	});
+	$('#ledOFF').click(function(){
+		$.ajax({
+			url:'http://192.168.2.120:8000/led1',
+			type:'POST',
+			async:false
+		});
+	});
 })

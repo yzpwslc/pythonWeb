@@ -25,17 +25,20 @@ class controlHander(tornado.web.RequestHandler):
 		self.cStates = [0,0,0]
 		self.cStates1 = [1,1,1]
 		gpio.setmode(gpio.BCM)
-		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(len(self.lPins))]
-		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
-		time.sleep(1)	
-		self.write('init')
+		# [gpio.setup(self.lPins[i],gpio.OUT) for i in range(len(self.lPins))]
+		# [gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
+		# time.sleep(1)	
+		# self.write('init')
 	
 	def get(self):
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
 		
 		self.write('control')
+	def post(self):
+		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 		
 if __name__ == "__main__":
+	
 	tornado.options.parse_command_line()
 	app = tornado.web.Application(handlers=[(r"/",IndexHandler),(r"/led1",controlHander)],template_path = os.path.join(os.path.dirname(__file__),'templates'),static_path = os.path.join(os.path.dirname(__file__), "static"),debug=True)
 	http_server = tornado.httpserver.HTTPServer(app)
