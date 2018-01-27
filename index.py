@@ -54,6 +54,8 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	return render_template('index.html')
+def test2():
+	return render_template('test2.html')
 
 def gen(camera):
 	while True:
