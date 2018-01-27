@@ -33,7 +33,7 @@ class controlHander(tornado.web.RequestHandler):
 	def get(self,id):
 		self.cStates1[int(id)] = 0
 		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates1)]
-		self.f[0](self,1)
+		self.f[0](1)
 	def post(self):
 		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates)]
 		
