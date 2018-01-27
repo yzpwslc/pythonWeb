@@ -8,8 +8,9 @@ import time
 
 from tornado.options import define,options
 define("port",default=8000,help="run on the given port",type=int)
-
-		
+lPins = [17,18,23]
+gpio.setmode(gpio.BCM)
+[gpio.setup(lPins[i],gpio.OUT) for i in range(len(lPins))]		
 
 class IndexHandler(tornado.web.RequestHandler):
 	# def __init__(self):
@@ -21,21 +22,16 @@ class IndexHandler(tornado.web.RequestHandler):
 		self.write(greeting + ', friendly user2!')
 class controlHander(tornado.web.RequestHandler):
 	def initialize(self):
-		self.lPins = [17,18,23]
 		self.cStates = [0,0,0]
 		self.cStates1 = [1,1,1]
-		gpio.setmode(gpio.BCM)
-		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(len(self.lPins))]
-		# [gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
-		# time.sleep(1)	
-		# self.write('init')
+
 	
 	def get(self):
-		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
+		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates1)]
 		
 		self.write('control')
 	def post(self):
-		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
+		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates)]
 		
 if __name__ == "__main__":
 	
