@@ -1,7 +1,22 @@
 from flask import Flask, render_template,Response
+from werkzeug.datastructures import Headers
 import cv2
 import time
-
+class MyResponse(Response):
+    def __init__(self, response=None, **kwargs):
+        kwargs['headers'] = ''
+        headers = kwargs.get('headers')
+        # 跨域控制 
+        origin = ('Access-Control-Allow-Origin', '*')
+        methods = ('Access-Control-Allow-Methods', 'HEAD, OPTIONS, GET, POST, DELETE, PUT')
+        if headers:
+            headers.add(*origin)
+            headers.add(*methods)
+        else:
+            headers = Headers([origin, methods])
+        kwargs['headers'] = headers
+        return super().__init__(response, **kwargs)
+		
 class VideoCam(object):
 	def __init__(self):
 		self.video = cv2.VideoCapture(0)
@@ -15,6 +30,7 @@ class VideoCam(object):
 		return jpeg.tobytes()
 
 app = Flask(__name__)
+app.response_class = MyResponse
 
 @app.route('/')
 def index():
