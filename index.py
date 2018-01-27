@@ -53,7 +53,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('index2.html')
 def test2():
 	return render_template('test2.html')
 
@@ -73,12 +73,10 @@ def gen(camera):
 def led1():
 	rs = rasCointrol()
 	rs.ledOn()	
-	return render_template('index.html')
 @app.route('/led0')
 def led0():
 	rs = rasCointrol()	
 	rs.ledOff()
-	return render_template('index.html')
 @app.route('/video_feed')
 def video_feed():
 	return Response(gen(VideoCam()),mimetype = 'multipart/x-mixed-replace;boundary=frame')

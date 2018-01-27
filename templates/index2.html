@@ -16,20 +16,20 @@
 			$('#ledon').click(function(){
 				$.ajax({
 					url:'/led1',
-					async:true
+					async:false
 				});
 			});
 			$('#ledoff').click(function(){
 				$.ajax({
 					url:'/led0',
-					async:true
+					async:false
 				});
 			});
 		});
 	</script>	
 </head>
 <body>
-	<!-- <img src = "{{ url_for('video_feed')}}" width = "1280" height = "720"/>-->
+	<img src = "{{ url_for('video_feed')}}" width = "1280" height = "720"/>
     <p><input type="button" name="contol" id = "ledon" value = "ledon"/></p><p><input type="button" name="contol" id = "ledoff" value = "ledoff"/></p>
 </body>
 </html>
