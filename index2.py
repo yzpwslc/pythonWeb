@@ -22,12 +22,12 @@ class controlHander(tornado.web.RequestHandler):
 		self.cStates = [0,0,0]
 		self.cStates1 = [1,1,1]
 		self.f = {}
-		self.f[0] = motorForward
-		self.f[1] = motorBackward
-		self.f[2] = motorLeft
-		self.f[3] = motorRight
-		self.f[4] = camUp
-		self.f[5] = camDown		
+		self.f[0] = self.motorForward
+		self.f[1] = self.motorBackward
+		self.f[2] = self.motorLeft
+		self.f[3] = self.motorRight
+		self.f[4] = self.camUp
+		self.f[5] = self.camDown		
 
 	
 	def get(self,id):
