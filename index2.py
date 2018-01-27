@@ -21,13 +21,34 @@ class controlHander(tornado.web.RequestHandler):
 	def initialize(self):
 		self.cStates = [0,0,0]
 		self.cStates1 = [1,1,1]
+		self.f = {}
+		self.f[0] = motorForward
+		self.f[1] = motorBackward
+		self.f[2] = motorLeft
+		self.f[3] = motorRight
+		self.f[4] = camUp
+		self.f[5] = camDown		
 
 	
 	def get(self,id):
 		self.cStates1[int(id)] = 0
 		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates1)]
+		self.f[0](self,1)
 	def post(self):
 		[gpio.output(lPins[i],v) for i,v in enumerate(self.cStates)]
+		
+	def motorForward(self,speed=1):
+		self.write('1')
+	def motorBackward(self,speed=1):
+		pass
+	def motorLeft(self,speed=1):
+		pass
+	def motorRight(self,speed=1):
+		pass
+	def camUp(self,speed=1):
+		pass
+	def camDown(self,speed=1):
+		pass
 		
 if __name__ == "__main__":
 	
