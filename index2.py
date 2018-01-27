@@ -29,7 +29,7 @@ class controlHander(tornado.web.RequestHandler):
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 		time.sleep(1)	
 		self.write('init')
-	def finish(self):
+	def __del__(self):
 		gpio.cleanup()		
 	def get(self):
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
