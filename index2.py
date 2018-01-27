@@ -20,7 +20,7 @@ class IndexHandler(tornado.web.RequestHandler):
 		greeting = self.get_argument('greeting','Hello')
 		self.write(greeting + ', friendly user2!')
 class controlHander(tornado.web.RequestHandler):
-	def __init__(self):
+	def initialize(self):
 		self.lPins = [17,18,23]
 		self.cStates = [0,0,0]
 		self.cStates1 = [1,1,1]
@@ -28,8 +28,8 @@ class controlHander(tornado.web.RequestHandler):
 		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(len(self.lPins))]
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 		time.sleep(1)	
-	def __del__(self):
-		gpio.clenup()		
+	def on_finish(self):
+		gpio.cleanup()		
 	def get(self):
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
 		self.write('control');
