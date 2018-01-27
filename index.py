@@ -14,7 +14,7 @@ class MyResponse(Response):
         else:
             headers = Headers([origin, methods])
         kwargs['headers'] = headers
-        return super().__init__(response, **kwargs)
+        return super(MyResponse,self).__init__(response, **kwargs)
 		
 class VideoCam(object):
 	def __init__(self):
