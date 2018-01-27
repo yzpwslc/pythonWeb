@@ -3,6 +3,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
+import RPi.GPIO as gpio
 import time
 
 from tornado.options import define,options
@@ -19,7 +20,18 @@ class IndexHandler(tornado.web.RequestHandler):
 		greeting = self.get_argument('greeting','Hello')
 		self.write(greeting + ', friendly user2!')
 class controlHander(tornado.web.RequestHandler):
+	def __init__(self):
+		self.lPins = [17,18,23]
+		self.cStates = [0,0,0]
+		self.cStates1 = [1,1,1]
+		gpio.setmode(gpio.BCM)
+		[gpio.setup(self.lPins[i],gpio.OUT) for i in range(len(self.lPins))]
+		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
+		time.sleep(1)	
+	def __del__(self):
+		gpio.clenup()		
 	def get(self):
+		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
 		self.write('control');
 		
 if __name__ == "__main__":
