@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test pCam</title>
+	<script>
+	function led1(){
+		window.location.href='/led1'
+	}
+	function led0(){
+		window.location.href='/led0'
+	}
+	</script>
+</head>
+<body>
+    <img src = "{{ url_for('video_feed')}}" width = "1280" height = "720"/>
+    <p><input type="button" name="contol" onclick="led1()" value = "ledon"/></p><p><input type="button" name="contol" onclick="led0()" value = "ledoff"/></p>
+</body>
+</html>
