@@ -29,10 +29,11 @@ class controlHander(tornado.web.RequestHandler):
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates)]
 		time.sleep(1)	
 		self.write('init')
-	def on_finish(self):
+	def finish(self):
 		gpio.cleanup()		
 	def get(self):
 		[gpio.output(self.lPins[i],v) for i,v in enumerate(self.cStates1)]
+		
 		self.write('control')
 		
 if __name__ == "__main__":
