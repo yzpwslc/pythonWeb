@@ -8,7 +8,7 @@ import time
 from tornado.options import define,options
 define("port",default=8000,help="run on the given port",type=int)
 
-static_path = os.path.join(os.paht.dirname(__file__), "static")		
+static_path = os.path.join(os.path.dirname(__file__), "static")		
 
 class IndexHandler(tornado.web.RequestHandler):
 	# def __init__(self):
@@ -17,7 +17,7 @@ class IndexHandler(tornado.web.RequestHandler):
 		# self.video.release()
 	def get(self):
 		greeting = self.get_argument('greeting','Hello')
-		self.write(greeting + ', friendly user2!')
+		self.write(greeting + ', friendly user2!' + static_path)
 class controlHander(tornado.web.RequestHandler):
 	def get(self):
 		self.write('control');
