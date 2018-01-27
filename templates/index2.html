@@ -2,17 +2,29 @@
 <html>
 <head>
 	<title>test pCam</title>
-	<script>
+	<script src = "{{url_for('static',filename='js/jquery.js')}}"></script>
+<!-- 	<script>
 	function led1(){
 		window.location.href='/led1'
 	}
 	function led0(){
 		window.location.href='/led0'
 	}
-	</script>
+	</script> -->
+	<script type = 'text/javascript'>
+		$(function(){
+			$('#ledon').click(function(){
+				$.ajax({
+					url:'/ledon',
+					type:'POST',
+					async:false
+				});
+			});
+		});
+	</script>	
 </head>
 <body>
     <img src = "{{ url_for('video_feed')}}" width = "1280" height = "720"/>
-    <p><input type="button" name="contol" onclick="led1()" value = "ledon"/></p><p><input type="button" name="contol" onclick="led0()" value = "ledoff"/></p>
+    <p><input type="button" name="contol" id = "ledon" value = "ledon"/></p><p><input type="button" name="contol" id = "ledoff" value = "ledoff"/></p>
 </body>
 </html>
