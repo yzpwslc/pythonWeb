@@ -8,8 +8,7 @@ import time
 from tornado.options import define,options
 define("port",default=8000,help="run on the given port",type=int)
 
-
-		
+static_path = os.path.join(os.paht.dirname(__file__), "static")		
 
 class IndexHandler(tornado.web.RequestHandler):
 	# def __init__(self):
@@ -25,7 +24,7 @@ class controlHander(tornado.web.RequestHandler):
 		
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
-	app = tornado.web.Application(handlers=[(r"/",IndexHandler),(r"/led1",controlHander)],debug=True)
+	app = tornado.web.Application(handlers=[(r"/",IndexHandler),(r"/led1",controlHander)],static_path,debug=True)
 	http_server = tornado.httpserver.HTTPServer(app)
 	http_server.listen(options.port)
 	tornado.ioloop.IOLoop.instance().start()
