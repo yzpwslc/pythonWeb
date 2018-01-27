@@ -24,7 +24,7 @@ class controlHander(tornado.web.RequestHandler):
 		
 if __name__ == "__main__":
 	tornado.options.parse_command_line()
-	app = tornado.web.Application(handlers=[(r"/",IndexHandler),(r"/led1",controlHander)],static_path = os.path.join(os.path.dirname(__file__), "static"),debug=True)
+	app = tornado.web.Application(handlers=[(r"/",IndexHandler),(r"/led1",controlHander)],template_path = os.path.join(os.path.dirname(__file__),'templates'),static_path = os.path.join(os.path.dirname(__file__), "static"),debug=True)
 	http_server = tornado.httpserver.HTTPServer(app)
 	http_server.listen(options.port)
 	tornado.ioloop.IOLoop.instance().start()
